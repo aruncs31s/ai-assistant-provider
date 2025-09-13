@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="ai_assistant_provider",
-    version="0.0.6",
+    version="0.0.7",
     author="Arun CS",
     author_email="aruncs31s@proton.com",
     description="Sub Module for AI Assistant Project",

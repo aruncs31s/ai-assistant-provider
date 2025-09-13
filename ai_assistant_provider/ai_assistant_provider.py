@@ -1,8 +1,8 @@
-
+"""AI Assistant Provider Abstract Base Class and Enums"""
 import abc
 from enum import Enum
+from datetime import datetime
 import time
-
 class AiProviderStatus(Enum):
     IDLE = "Idle"
     BUSY = "Busy"
@@ -12,7 +12,6 @@ class AiProviderList(Enum):
     OLLAMA = "Ollama"
     ALEXA = "Alexa"
     GITHUB_GPT_5 = "GitHub GPT-5"
-    
 class AiProvider(abc.ABC):
     def __init__(self):
         self._status = AiProviderStatus.IDLE
@@ -40,6 +39,10 @@ class AiProvider(abc.ABC):
     @status.setter
     def status(self, value: AiProviderStatus) -> None:
         """Property setter for status"""
+        if value == AiProviderStatus.IDLE:
+            self.answer_time = time.time()
+        if value == AiProviderStatus.BUSY:
+            self.question_asked_time = time.time()
         self._status = value
     
     @property
@@ -49,7 +52,6 @@ class AiProvider(abc.ABC):
     @answer.setter
     def answer(self, value: str) -> None:
         """Property setter for answer"""
-        self.answer_time = time.time()
         self._answer = value
         
     @property
@@ -99,6 +101,4 @@ class AiProvider(abc.ABC):
             self.response_time = self.answer_time - self.question_asked_time
             return self.response_time
         else:
-            return 0.0 
-
-
+            return 0.0  
