@@ -1,0 +1,4 @@
+build
+dist
+ai_assistant_provider.egg-info
+__pycache__
